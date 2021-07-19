@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import './style.css';
 
 class TodoList extends Component {
     constructor(props) {
@@ -18,7 +19,11 @@ class TodoList extends Component {
             <Fragment>
                 {/* Fragment是一个占位符，替代最外层包裹全部的div */}
                 <div>
+                    <label htmlFor='insertArea'> Input:</label>
+                    
                     <input
+                        id='insertArea'
+                        className='input'
                         value={this.state.inputValue}
                         onChange={this.handleInputChange.bind(this)}
                     // bind可以设置绑定this指向
@@ -28,7 +33,11 @@ class TodoList extends Component {
                 <ul>
                     {
                         this.state.list.map((item, index) => {
-                            return <li key={index} onClick={this.handleItemDelete.bind(this, index)}>{item}</li>
+                            return <li key={index} onClick={this.handleItemDelete.bind(this, index)}
+                            dangerouslySetInnerHTML={
+                                {__html:item}
+                            }
+                            ></li>
                         })
                     }
                 </ul>
